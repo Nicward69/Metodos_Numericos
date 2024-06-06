@@ -1,0 +1,22 @@
+import numpy as np
+
+# Datos de tiempo (en minutos) y carros pasados
+tiempo = np.array([0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 70, 80, 90, 100, 110, 120])
+carros = np.array([9, 12, 10, 14, 9, 11, 10, 11, 13, 8, 9, 10, 9, 8, 7, 9, 6, 8, 10])
+
+# Método de la parábola (similar al método de Simpson)
+def metodo_parabola(y, x):
+    n = len(x) - 1
+    h = (x[-1] - x[0]) / n
+    integral = y[0] + y[-1]
+    for i in range(1, n, 2):
+        integral += 4 * y[i]
+    for i in range(2, n-1, 2):
+        integral += 2 * y[i]
+    integral *= h / 3
+    return integral
+
+parabola = metodo_parabola(carros, tiempo)
+
+# Imprimir el resultado
+print(f"Integral por el método de la parábola: {parabola}")
